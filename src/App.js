@@ -1,25 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 
 
 function App() {
-  const [data, setData] = useState([])
+  const [total, setTotal] = useState(0)
 
-  return <div className="App">
-    <div className="container">
-      <h3>My Items</h3>
-      <input />
-      <button>Add Item!</button>
-      <div className="items-list">
-        <p>Latte</p>
-        <p>Mocha</p>
-      </div>
+  console.log("App rendered")
+  return <div>
+    <h1>Total {total}</h1>
+    <Voter total={total} setTotal={setTotal} title="للي يستحق" />
+    <Voter total={total} setTotal={setTotal} title="مشرف" />
+    <Voter total={total} setTotal={setTotal} title="ولد عمي" />
     </div>
-  </div>;
 }
 
+function Voter(props){
+  const [votes, setVotes] = useState(0);
 
+  function voted(){
+    props.setTotal(props.total+1);
+    setVotes(votes+1)
+  }
+
+  console.log(props.title+" rendered");
+  return <div>
+    <button onClick={voted}>{props.title}</button>
+    <h3>Votes: {votes}</h3>
+    
+  </div>
+}
 
 
 export default App;
